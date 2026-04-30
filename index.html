@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE/MAX Advantage Realty — Car Wash Portfolio Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --remax-red: #DC1C2E;
+    --remax-blue: #003DA5;
+    --remax-dark: #0A0F1E;
+    --remax-white: #FAFAFA;
+    --remax-light: #F2F4F8;
+    --remax-muted: #8892A4;
+    --remax-border: #E0E4ED;
+    --remax-red-soft: rgba(220,28,46,0.08);
+    --remax-blue-soft: rgba(0,61,165,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--remax-white);
+    color: var(--remax-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--remax-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+    border-bottom: 3px solid var(--remax-red);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-balloon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .logo-text span { color: var(--remax-red); }
+  .header-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--remax-muted);
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--remax-dark);
+    color: #fff;
+    padding: 64px 24px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 90% 10%, rgba(220,28,46,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 10% 90%, rgba(0,61,165,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--remax-red);
+    background: rgba(220,28,46,0.12);
+    border: 1px solid rgba(220,28,46,0.3);
+    border-radius: 2px;
+    padding: 5px 12px;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--remax-red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)}
+  }
+  .hero h1 {
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--remax-red);
+  }
+  .hero-sub {
+    font-size: clamp(14px, 3.5vw, 17px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 14px 20px;
+    min-width: 120px;
+  }
+  .hero-stat-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat-num span { color: var(--remax-red); }
+  .hero-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 56px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--remax-red);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(22px, 5vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--remax-dark);
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--remax-muted);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+
+  /* ── CATEGORY BLOCKS ── */
+  .category {
+    margin-bottom: 48px;
+  }
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--remax-border);
+  }
+  .cat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cat-icon.red { background: var(--remax-red); }
+  .cat-icon.blue { background: var(--remax-blue); }
+  .cat-icon.dark { background: var(--remax-dark); }
+  .cat-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--remax-dark);
+  }
+  .cat-count {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--remax-muted);
+    background: var(--remax-light);
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media(min-width: 540px) {
+    .service-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .service-card {
+    background: #fff;
+    border: 1px solid var(--remax-border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: var(--remax-red);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--remax-red);
+    border-radius: 8px 0 0 8px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--remax-dark);
+    margin-bottom: 6px;
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+  .service-value {
+    font-size: 12px;
+    color: var(--remax-muted);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--remax-border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── QUOTE SECTION ── */
+  .quote-section {
+    background: var(--remax-dark);
+    color: #fff;
+    padding: 64px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(220,28,46,0.12) 0%, transparent 70%);
+  }
+  .quote-mark {
+    font-size: 80px;
+    line-height: 0.6;
+    color: var(--remax-red);
+    font-family: 'Source Serif 4', serif;
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .quote-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.9);
+    max-width: 680px;
+    margin: 0 auto 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-text strong {
+    font-style: normal;
+    font-weight: 600;
+    color: #fff;
+  }
+  .quote-attr {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--remax-red);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── BUYER TARGETS ── */
+  .buyers-section {
+    background: var(--remax-light);
+    padding: 56px 24px;
+  }
+  .buyers-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .buyer-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .buyer-pill {
+    background: #fff;
+    border: 1px solid var(--remax-border);
+    border-radius: 24px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--remax-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .buyer-pill::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--remax-red);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--remax-dark);
+    color: rgba(255,255,255,0.4);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    border-top: 3px solid var(--remax-red);
+  }
+  .site-footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: 2px;
+    background: var(--remax-red);
+    z-index: 99;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="logo">
+    <!-- RE/MAX balloon SVG -->
+    <svg class="logo-balloon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="16" cy="13" rx="10" ry="11" fill="#DC1C2E"/>
+      <path d="M16 24 L13.5 30 L16 28 L18.5 30 Z" fill="#003DA5"/>
+      <text x="16" y="17" text-anchor="middle" fill="white" font-size="7" font-family="Montserrat,sans-serif" font-weight="900">RE/MAX</text>
+    </svg>
+    <div class="logo-text">RE/<span>MAX</span> ADVANTAGE<br>REALTY</div>
+  </div>
+  <div class="header-badge">Confidential</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">Commercial Marketing Proposal</div>
+  <h1>Your Car Wash.<br><em>Sold Right.</em></h1>
+  <p class="hero-sub">A comprehensive marketing strategy to position your two-location car wash portfolio as a scalable business opportunity — attracting the right buyers while protecting your confidentiality.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">2<span>+</span></div>
+      <div class="hero-stat-label">Locations</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">29<span>+</span></div>
+      <div class="hero-stat-label">Marketing Services</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1<span>st</span></div>
+      <div class="hero-stat-label">Class Results</div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<main class="section fade-in" id="services">
+  <div class="section-label">Our Marketing Plan</div>
+  <h2 class="section-title">Everything Needed to Sell with Confidence</h2>
+  <p class="section-desc">A full-service commercial marketing plan, purpose-built for your two-location car wash portfolio in Southwestern Ontario.</p>
+
+  <!-- Category 1: Positioning & Strategy -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon red">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="white"/><line x1="10" y1="1" x2="10" y2="4" stroke="white" stroke-width="2"/><line x1="10" y1="16" x2="10" y2="19" stroke="white" stroke-width="2"/><line x1="1" y1="10" x2="4" y2="10" stroke="white" stroke-width="2"/><line x1="16" y1="10" x2="19" y2="10" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <div class="cat-name">Positioning &amp; Strategy</div>
+      <div class="cat-count">6 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Professional Commercial Listing Strategy</div>
+        <div class="service-value">Positions the two car washes as a serious investment opportunity — not just another business for sale.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Confidential Teaser Campaign</div>
+        <div class="service-value">Attracts buyers without exposing the business name, staff, customers, or competitors too early.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Two-Location Brand Story</div>
+        <div class="service-value">Makes the sale feel bigger and more valuable. Buyers see scale, expansion, and market presence.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Investor Headline &amp; Hook Writing</div>
+        <div class="service-value">Creates clear messaging: "Two-location car wash portfolio with upside through memberships, fleet accounts, and local SEO."</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Commercial Market Positioning</div>
+        <div class="service-value">Connects the opportunity to broader local commercial demand and Southwestern Ontario growth.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Compliance-First Advertising Review</div>
+        <div class="service-value">Reduces risk by keeping claims accurate, clear, and compliant with real estate advertising standards.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 2: Marketing & Outreach -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon blue">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10L10 3L17 10" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M10 3V17" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M6 17H14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-name">Marketing &amp; Outreach</div>
+      <div class="cat-count">8 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Full Investor-Style Marketing Package</div>
+        <div class="service-value">Gives buyers a clear reason to act — business, locations, revenue potential, upside, and opportunity in one polished package.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Direct Buyer Outreach Campaign</div>
+        <div class="service-value">We don't wait for buyers to find the listing — we actively contact likely buyers who already understand the car wash business.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Broker Network Promotion</div>
+        <div class="service-value">Gets the opportunity in front of other commercial Realtors who may already have qualified buyers ready to act.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Email Marketing Campaign</div>
+        <div class="service-value">Sends the opportunity directly to qualified buyers, investors, business owners, and commercial contacts.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Social Media Marketing Assets</div>
+        <div class="service-value">Polished posts for LinkedIn, Facebook, Instagram, and X to increase reach and make the opportunity look professional.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Commercial Landing Page</div>
+        <div class="service-value">A dedicated online home with photos, highlights, inquiry form, and controlled buyer next steps.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">AI-Enhanced Marketing Content</div>
+        <div class="service-value">Speeds up creation of brochures, captions, video scripts, landing page copy, email campaigns, and buyer summaries.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Weekly Marketing Activity Updates</div>
+        <div class="service-value">Shows the seller exactly what has been done, who was contacted, how many inquiries came in, and buyer feedback.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 3: Visual & Creative -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon dark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="white" stroke-width="1.8"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="white" stroke-width="1.8"/><rect x="11" y="11" width="6" height="6" rx="1" fill="white"/></svg>
+      </div>
+      <div class="cat-name">Visual &amp; Creative Production</div>
+      <div class="cat-count">5 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Professional Photography</div>
+        <div class="service-value">Makes the locations look clean, credible, and well-maintained. Strong photos build buyer confidence.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Drone Photos &amp; Video</div>
+        <div class="service-value">Shows road exposure, traffic routes, nearby businesses, access points, and surrounding development.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Short Promotional Video</div>
+        <div class="service-value">A fast, professional overview that can be sent to investors, operators, and business buyers.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Canva-Designed Brochures &amp; Graphics</div>
+        <div class="service-value">Clean, modern, client-facing materials that look professional and are easy to share.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Before-and-After Marketing Improvement Plan</div>
+        <div class="service-value">Shows buyers how the business could grow with better online presence, memberships, reviews, and local advertising.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 4: Digital & Data -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon red">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 14L8 9L11 12L14 7L17 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="2" width="16" height="16" rx="2" stroke="white" stroke-width="1.5"/></svg>
+      </div>
+      <div class="cat-name">Digital Presence &amp; Data</div>
+      <div class="cat-count">5 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Google Maps / Business Profile Review</div>
+        <div class="service-value">Shows how visible each location is online and identifies easy wins a buyer could use to increase volume.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Local SEO Opportunity Report</div>
+        <div class="service-value">Helps buyers see how better rankings for "car wash near me" can create more revenue after purchase.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Google Review Analysis</div>
+        <div class="service-value">Turns review count, star ratings, and competitor comparison into a selling feature or improvement opportunity.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Traffic Count &amp; Visibility Graphics</div>
+        <div class="service-value">Helps buyers quickly understand exposure, vehicle flow, access, and location strength.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Competitor Mapping</div>
+        <div class="service-value">Shows buyers where the car washes sit in the market compared to other washes, detailers, gas stations, and auto businesses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 5: Buyer Qualification -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon blue">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="4" stroke="white" stroke-width="1.8"/><path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-name">Buyer Qualification &amp; Protection</div>
+      <div class="cat-count">3 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Buyer Lead Capture Form</div>
+        <div class="service-value">Filters serious buyers from casual inquiries and collects contact details, proof of funds, and buying criteria.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">NDA-Controlled Information Release</div>
+        <div class="service-value">Protects sensitive business details while still allowing qualified buyers to receive deeper information.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Upside Opportunity Section</div>
+        <div class="service-value">Helps buyers see future growth from memberships, fleet contracts, detailing, vending, signage, and online visibility.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 6: Location Intelligence -->
+  <div class="category fade-in">
+    <div class="cat-header">
+      <div class="cat-icon dark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.24 2 5 4.24 5 7c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5z" stroke="white" stroke-width="1.8"/><circle cx="10" cy="7" r="2" fill="white"/></svg>
+      </div>
+      <div class="cat-name">Location Intelligence</div>
+      <div class="cat-count">2 services</div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-name">Area Amenity &amp; Demand Map</div>
+        <div class="service-value">Shows nearby residential areas, retail plazas, gas stations, dealerships, apartments, employment nodes, and traffic generators.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Buyer Persona Targeting</div>
+        <div class="service-value">Focuses marketing on the right buyers: car wash operators, investors, auto service owners, gas station operators, and owner-operators.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Buyer Targets -->
+<section class="buyers-section fade-in">
+  <div class="buyers-inner">
+    <div class="section-label">Who We Target</div>
+    <h2 class="section-title">Reaching the Right Buyers</h2>
+    <p class="section-desc">We focus on buyers who already understand the car wash business and see its value immediately.</p>
+    <div class="buyer-pills">
+      <div class="buyer-pill">Car Wash Operators</div>
+      <div class="buyer-pill">Real Estate Investors</div>
+      <div class="buyer-pill">Auto Service Owners</div>
+      <div class="buyer-pill">Gas Station Operators</div>
+      <div class="buyer-pill">Fleet Service Companies</div>
+      <div class="buyer-pill">Owner-Operators</div>
+      <div class="buyer-pill">Commercial Realtors</div>
+      <div class="buyer-pill">Portfolio Buyers</div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="quote-section fade-in">
+  <span class="quote-mark">"</span>
+  <p class="quote-text">My marketing plan is designed to make the opportunity <strong>easy for the right buyer to understand</strong>, easy to share, and easy to act on — while protecting your confidentiality and positioning the two car washes as a <strong>scalable business opportunity.</strong></p>
+  <div class="quote-attr">RE/MAX Advantage Realty — Commercial Division</div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <strong>RE/MAX Advantage Realty</strong> &nbsp;·&nbsp; Commercial Real Estate Division &nbsp;·&nbsp; Southwestern Ontario &nbsp;·&nbsp; Confidential Marketing Proposal
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>REMAX Balloon — LED</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #faf9f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf9f5; z-index: 9999; }
+    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_placeholder { color: #999; font-size: 14px; }
+  </style>
+  <noscript>
+    <style>#__bundler_loading { display: none; }</style>
+    <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
+      This page requires JavaScript to display.
+    </div>
+  </noscript>
+</head>
+<body>
+  <div id="__bundler_thumbnail">
+  <svg viewBox="0 0 400 455" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <rect width="400" height="455" fill="#000E35"></rect>
+    <path d="M 200,18 A 173,173 0 0,0 27,191" stroke="#CC0000" stroke-width="3" stroke-linecap="round" opacity="0.9"></path>
+    <path d="M 200,18 A 173,173 0 0,1 373,191" stroke="#FF2200" stroke-width="3" stroke-linecap="round" opacity="0.85"></path>
+    <path d="M 200,18 L 200,182" stroke="#EE3300" stroke-width="2.5" stroke-linecap="round" opacity="0.8"></path>
+    <path d="M 27,182 L 373,182" stroke="#F7F5EE" stroke-width="2" opacity="0.5"></path>
+    <path d="M 27,208 L 373,208" stroke="#F7F5EE" stroke-width="2" opacity="0.5"></path>
+    <path d="M 27,208 C 22,300 55,400 200,445" stroke="#0033DD" stroke-width="3" stroke-linecap="round" opacity="0.9"></path>
+    <path d="M 373,208 C 378,300 345,400 200,445" stroke="#0055FF" stroke-width="3" stroke-linecap="round" opacity="0.85"></path>
+    <path d="M 200,208 C 200,280 200,360 200,415" stroke="#0044EE" stroke-width="2.5" stroke-linecap="round" opacity="0.7"></path>
+    <!-- Glow spots -->
+    <circle cx="27" cy="191" r="8" fill="#FF2200" opacity="0.7" filter="url(#tg)"></circle>
+    <circle cx="200" cy="445" r="8" fill="#0055FF" opacity="0.7" filter="url(#tg)"></circle>
+    <circle cx="200" cy="18" r="6" fill="#FF4400" opacity="0.8" filter="url(#tg)"></circle>
+    <defs>
+      <filter id="tg"><feGaussianBlur stdDeviation="4"></feGaussianBlur></filter>
+    </defs>
+  </svg>
+</div>
+  <div id="__bundler_loading">Unpacking...</div>
+
+  <script>
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    const blobUrls = {};
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    setStatus('Rendering...');
+    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: fetch and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const r = await fetch(s.src);
+        s.textContent = await r.text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  </script>
+
+  <script type="__bundler/manifest">
+{}
+  </script>
+
+  <script type="__bundler/ext_resources">
+[]
+  </script>
+
+  <script type="__bundler/template">
+"<!DOCTYPE html>\n<html><head>\n<meta charset=\"UTF-8\">\n<title>REMAX Balloon — LED<\u002Ftitle>\n\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  html, body {\n    background: transparent;\n    width: 100%; height: 100vh;\n    display: flex; align-items: center; justify-content: center;\n    overflow: hidden;\n  }\n  svg { width: clamp(240px, 72vmin, 500px); height: auto; display: block; }\n\n  /* ── filters injected via inline SVG defs ── */\n<\u002Fstyle>\n<\u002Fhead>\n<body>\n\n<svg id=\"balloon\" viewBox=\"0 0 400 455\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\">\n<defs>\n  <filter id=\"gdr\" x=\"-200%\" y=\"-200%\" width=\"500%\" height=\"500%\" color-interpolation-filters=\"sRGB\">\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"9\" result=\"b1\"><\u002FfeGaussianBlur>\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"3\" result=\"b2\"><\u002FfeGaussianBlur>\n    <feMerge><feMergeNode in=\"b1\"><\u002FfeMergeNode><feMergeNode in=\"b2\"><\u002FfeMergeNode><feMergeNode in=\"SourceGraphic\"><\u002FfeMergeNode><\u002FfeMerge>\n  <\u002Ffilter>\n  <filter id=\"gr\" x=\"-200%\" y=\"-200%\" width=\"500%\" height=\"500%\" color-interpolation-filters=\"sRGB\">\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"11\" result=\"b1\"><\u002FfeGaussianBlur>\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"4\" result=\"b2\"><\u002FfeGaussianBlur>\n    <feMerge><feMergeNode in=\"b1\"><\u002FfeMergeNode><feMergeNode in=\"b2\"><\u002FfeMergeNode><feMergeNode in=\"SourceGraphic\"><\u002FfeMergeNode><\u002FfeMerge>\n  <\u002Ffilter>\n  <filter id=\"gcr\" x=\"-200%\" y=\"-200%\" width=\"500%\" height=\"500%\" color-interpolation-filters=\"sRGB\">\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"7\" result=\"b1\"><\u002FfeGaussianBlur>\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"2\" result=\"b2\"><\u002FfeGaussianBlur>\n    <feMerge><feMergeNode in=\"b1\"><\u002FfeMergeNode><feMergeNode in=\"b2\"><\u002FfeMergeNode><feMergeNode in=\"SourceGraphic\"><\u002FfeMergeNode><\u002FfeMerge>\n  <\u002Ffilter>\n  <filter id=\"gnv\" x=\"-200%\" y=\"-200%\" width=\"500%\" height=\"500%\" color-interpolation-filters=\"sRGB\">\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"9\" result=\"b1\"><\u002FfeGaussianBlur>\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"3\" result=\"b2\"><\u002FfeGaussianBlur>\n    <feMerge><feMergeNode in=\"b1\"><\u002FfeMergeNode><feMergeNode in=\"b2\"><\u002FfeMergeNode><feMergeNode in=\"SourceGraphic\"><\u002FfeMergeNode><\u002FfeMerge>\n  <\u002Ffilter>\n  <filter id=\"gbl\" x=\"-200%\" y=\"-200%\" width=\"500%\" height=\"500%\" color-interpolation-filters=\"sRGB\">\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"11\" result=\"b1\"><\u002FfeGaussianBlur>\n    <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"4\" result=\"b2\"><\u002FfeGaussianBlur>\n    <feMerge><feMergeNode in=\"b1\"><\u002FfeMergeNode><feMergeNode in=\"b2\"><\u002FfeMergeNode><feMergeNode in=\"SourceGraphic\"><\u002FfeMergeNode><\u002FfeMerge>\n  <\u002Ffilter>\n<\u002Fdefs>\n\n<!-- ═══ BASE DIM LINES ═══ -->\n<path id=\"p-tl\" d=\"M 200,18 A 173,173 0 0,0 27,191\" stroke=\"#990000\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.6\"><\u002Fpath>\n<path id=\"p-tr\" d=\"M 200,18 A 173,173 0 0,1 373,191\" stroke=\"#CC1100\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.55\"><\u002Fpath>\n<path id=\"p-uv\" d=\"M 200,18 L 200,182\" stroke=\"#BB2200\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.5\"><\u002Fpath>\n<path id=\"p-ht\" d=\"M 27,182 L 373,182\" stroke=\"#F7F5EE\" stroke-width=\"1.5\" stroke-opacity=\"0.22\"><\u002Fpath>\n<path id=\"p-hb\" d=\"M 27,208 L 373,208\" stroke=\"#F7F5EE\" stroke-width=\"1.5\" stroke-opacity=\"0.22\"><\u002Fpath>\n<path id=\"p-bl\" d=\"M 27,208 C 22,300 55,400 200,445\" stroke=\"#001166\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.7\"><\u002Fpath>\n<path id=\"p-br\" d=\"M 373,208 C 378,300 345,400 200,445\" stroke=\"#0033BB\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.6\"><\u002Fpath>\n<path id=\"p-lv\" d=\"M 200,208 C 200,280 200,360 200,415\" stroke=\"#002299\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-opacity=\"0.45\"><\u002Fpath>\n\n<\u002Fsvg>\n\n<script>\n// ── Path config ─────────────────────────────────────────────────\n// [id, glowColor, coreColor, filterId, duration(s), delay(s), glowWidth]\nconst CFG = [\n  ['p-tl', '#CC0000', '#FF5533', 'gdr', 3.0, 0.00, 5  ],\n  ['p-tr', '#FF2200', '#FF9966', 'gr',  3.0, 0.55, 6  ],\n  ['p-uv', '#EE3300', '#FFAA77', 'gr',  1.9, 0.28, 4.5],\n  ['p-ht', '#F7F5EE', '#FFFFFF', 'gcr', 2.4, 0.80, 4  ],\n  ['p-hb', '#F7F5EE', '#FFFFFF', 'gcr', 2.4, 1.10, 4  ],\n  ['p-bl', '#0033DD', '#5588FF', 'gnv', 3.4, 1.30, 5  ],\n  ['p-br', '#0055FF', '#88BBFF', 'gbl', 3.4, 0.75, 6  ],\n  ['p-lv', '#0044EE', '#6699FF', 'gbl', 2.1, 1.55, 4.5],\n];\n\nconst svg   = document.getElementById('balloon');\nconst NS    = 'http://www.w3.org/2000/svg';\nconst sheet = document.createElement('style');\ndocument.head.appendChild(sheet);\n\nCFG.forEach(([id, glowCol, coreCol, fid, dur, del, gw]) => {\n  const base = document.getElementById(id);\n  const len  = Math.ceil(base.getTotalLength());\n  const seg  = Math.min(90, len * 0.32);\n  const seg2 = seg * 0.42;\n  const segE = seg * 0.52;\n\n  // CSS keyframes for each layer\n  const kfGlow  = `led-g-${id}`;\n  const kfCore  = `led-c-${id}`;\n  const kfEcho  = `led-e-${id}`;\n\n  sheet.textContent += `\n    @keyframes ${kfGlow}  { from { stroke-dashoffset:${seg};  } to { stroke-dashoffset:${-len}; } }\n    @keyframes ${kfCore}  { from { stroke-dashoffset:${seg};  } to { stroke-dashoffset:${-len}; } }\n    @keyframes ${kfEcho}  { from { stroke-dashoffset:${segE}; } to { stroke-dashoffset:${-len}; } }\n  `;\n\n  function mkEl(color, width, opacity, dashSeg, dashTotal, kf, delay) {\n    const el = base.cloneNode(false);\n    el.removeAttribute('id');\n    el.setAttribute('stroke',           color);\n    el.setAttribute('stroke-width',     width);\n    el.setAttribute('stroke-opacity',   opacity);\n    el.setAttribute('stroke-dasharray', `${dashSeg} ${dashTotal + dashSeg}`);\n    el.setAttribute('stroke-dashoffset', dashSeg);\n    el.style.animation = `${kf} ${dur}s linear ${delay}s infinite`;\n    el.style.animationFillMode = 'both';\n    return el;\n  }\n\n  // 1. Outer glow halo\n  const g = mkEl(glowCol, gw,        '1',    seg,  len, kfGlow, del);\n  g.setAttribute('filter', `url(#${fid})`);\n  svg.appendChild(g);\n\n  // 2. Bright hot core\n  const c = mkEl(coreCol, gw * 0.33, '1',    seg2, len, kfCore, del);\n  svg.appendChild(c);\n\n  // 3. Ghost echo (trailing pulse, half-phase offset)\n  const e = mkEl(glowCol, gw * 0.7,  '0.30', segE, len, kfEcho, del + dur * 0.48);\n  e.setAttribute('filter', `url(#${fid})`);\n  svg.appendChild(e);\n});\n<\u002Fscript>\n\n\n\n<\u002Fbody><\u002Fhtml>"
+  </script>
+</body>
+</html>

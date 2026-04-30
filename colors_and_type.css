@@ -1,0 +1,253 @@
+/* ============================================================
+   REMAX Advantage Realty — Design System
+   colors_and_type.css
+   2025 Brand Evolution
+   ============================================================ */
+
+/* ── Fonts ─────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Black.otf') format('opentype');
+  font-weight: 900; font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-BoldItalic.otf') format('opentype');
+  font-weight: 700; font-style: italic;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Medium.otf') format('opentype');
+  font-weight: 500; font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Book.otf') format('opentype');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-BookItalic.otf') format('opentype');
+  font-weight: 400; font-style: italic;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Light.otf') format('opentype');
+  font-weight: 300; font-style: normal;
+}
+@font-face {
+  font-family: 'AkzidenzGrotesk';
+  src: url('fonts/AkzidenzGrotesk-BoldItalic.otf') format('opentype');
+  font-weight: 700; font-style: italic;
+}
+@font-face {
+  font-family: 'AkzidenzGrotesk';
+  src: url('fonts/AkzidenzGrotesk-MediumItalic.otf') format('opentype');
+  font-weight: 500; font-style: italic;
+}
+@font-face {
+  font-family: 'Arial';
+  src: url('fonts/Arial.ttf') format('truetype');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'Arial';
+  src: url('fonts/Arial-Bold.ttf') format('truetype');
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: 'Arial';
+  src: url('fonts/Arial-Italic.ttf') format('truetype');
+  font-weight: 400; font-style: italic;
+}
+
+/* ── Base Color Tokens ─────────────────────────────────────── */
+:root {
+  /* Brand Primary */
+  --remax-red:        #FF1200;
+  --remax-blue:       #0043FF;
+  --remax-dark-red:   #660000;
+  --remax-dark-blue:  #000E35;
+  --remax-cream:      #F7F5EE;
+  --remax-black:      #000000;
+
+  /* Neutral Scale */
+  --neutral-50:   #FAFAF8;
+  --neutral-100:  #F7F5EE;   /* = cream */
+  --neutral-200:  #EBEBDF;
+  --neutral-300:  #D4D2C8;
+  --neutral-400:  #A8A79E;
+  --neutral-500:  #7B7A73;
+  --neutral-600:  #55544F;
+  --neutral-700:  #3A3935;
+  --neutral-800:  #242320;
+  --neutral-900:  #0F0E0D;
+
+  /* Semantic Colors */
+  --color-bg:          var(--remax-cream);
+  --color-bg-dark:     var(--remax-dark-blue);
+  --color-surface:     #FFFFFF;
+  --color-surface-dark: #0A1A3A;
+
+  --color-fg1:         var(--remax-black);
+  --color-fg2:         var(--neutral-600);
+  --color-fg3:         var(--neutral-400);
+  --color-fg-inverse:  var(--remax-cream);
+
+  --color-accent:       var(--remax-red);
+  --color-accent-dark:  var(--remax-dark-red);
+  --color-accent2:      var(--remax-blue);
+  --color-accent2-dark: var(--remax-dark-blue);
+
+  --color-border:      var(--neutral-300);
+  --color-divider:     var(--neutral-200);
+
+  /* Font Families */
+  --font-primary:   'Gotham', 'Arial', sans-serif;
+  --font-secondary: 'AkzidenzGrotesk', 'Arial', sans-serif;
+  --font-fallback:  'Arial', Helvetica, sans-serif;
+
+  /* Type Scale */
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   22px;
+  --text-xl:   28px;
+  --text-2xl:  36px;
+  --text-3xl:  48px;
+  --text-4xl:  64px;
+  --text-5xl:  80px;
+
+  /* Letter Spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+  --tracking-widest:  0.14em;
+
+  /* Line Heights */
+  --leading-tight:  1.1;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.75;
+
+  /* Spacing Scale */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+
+  /* Border Radius */
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg:  0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+  --shadow-xl:  0 20px 60px rgba(0,0,0,0.16);
+}
+
+/* ── Semantic Type Roles ────────────────────────────────────── */
+/* Display — hero headlines */
+.type-display {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: var(--text-5xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+/* H1 */
+.type-h1 {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+/* H2 */
+.type-h2 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+/* H3 */
+.type-h3 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+}
+/* H4 */
+.type-h4 {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+/* Lead / Subhead */
+.type-lead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+}
+/* Body */
+.type-body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+/* Body Small */
+.type-body-sm {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+/* Label / UI */
+.type-label {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+/* Caption */
+.type-caption {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  color: var(--color-fg2);
+  line-height: var(--leading-normal);
+}
+/* Legal / Fine Print */
+.type-legal {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: var(--text-xs);
+  color: var(--color-fg3);
+  line-height: var(--leading-normal);
+}
